@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <!-- Added Font Awesome for footer social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -37,22 +36,19 @@
         .text-brand-navy-light { color: #a4b3d6; }
         .border-brand-navy-light { border-color: rgba(164, 179, 214, 0.15); }
         
-        .hero-slide {
+        /* Smooth Crossfade for Hero Slideshow */
+        .slideshow-layer {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            min-height: 100vh;
+            inset: 0;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            z-index: 1;
+            transition: opacity 1.8s ease-in-out;
+            z-index: 0;
         }
         
-        .hero-slide.active {
+        .slideshow-layer.active {
             opacity: 1;
         }
 
@@ -62,7 +58,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.25) 60%, rgba(0, 0, 0, 0.15) 100%);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 60%, rgba(0, 0, 0, 0.25) 100%);
             z-index: 2;
         }
 
@@ -77,30 +73,28 @@
     </style>
 </head>
 <body class="text-[#111827] overflow-x-hidden">
-    <!-- NAVBAR -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200">
-    <div class="max-w-screen-2xl mx-auto flex items-center justify-between px-8 py-2">
-        <div class="flex items-center justify-center max-h-16 overflow-hidden">
-    <img src="image/lg.PNG" 
-         alt="Ariclux Logo" 
-         class="h-16 w-auto object-scale-down [image-rendering:_-webkit-optimize-contrast] [image-rendering:_crisp-edges] [image-rendering:_pixelated]">
-</div>
-                    
-        <div class="hidden md:flex items-center gap-x-8 text-xs uppercase tracking-widest font-bold text-gray-950">
-            <a href="#services" class="hover:text-[#ff9100] transition-colors">Services</a>
-            <a href="#craft" class="hover:text-[#ff9100] transition-colors">Craftsmanship</a>
-            <a href="#contact" class="hover:text-[#ff9100] transition-colors">Contact</a>
+        <div class="max-w-screen-2xl mx-auto flex items-center justify-between px-8 py-2">
+            <div class="flex items-center justify-center max-h-16 overflow-hidden">
+                <img src="image/LG.PNG" 
+                     alt="Ariclux Logo" 
+                     class="h-16 w-auto object-scale-down [image-rendering:_-webkit-optimize-contrast] [image-rendering:_crisp-edges] [image-rendering:_pixelated]">
+            </div>
+                                
+            <div class="hidden md:flex items-center gap-x-8 text-xs uppercase tracking-widest font-bold text-gray-950">
+                <a href="#services" class="hover:text-[#ff9100] transition-colors">Services</a>
+                <a href="#craft" class="hover:text-[#ff9100] transition-colors">Craftsmanship</a>
+                <a href="#contact" class="hover:text-[#ff9100] transition-colors">Contact</a>
+            </div>
+                                
+            <a href="tel:08170900008" class="px-6 py-2.5 bg-transparent border border-[#ff9100] text-[#ff9100] hover:bg-[#ff9100] hover:text-white transition-all text-xs tracking-widest uppercase font-semibold">
+                08170900008
+            </a>
         </div>
-                    
-        <a href="tel:08170900008" class="px-6 py-2.5 bg-transparent border border-[#ff9100] text-[#ff9100] hover:bg-[#ff9100] hover:text-white transition-all text-xs tracking-widest uppercase font-semibold">
-            08170900008
-        </a>
-    </div>
-</nav>
+    </nav>
 
-    <!-- HERO SECTION -->
-    <section class="relative w-full min-h-screen flex items-center overflow-hidden bg-gray-900">
-        <div id="slideshow-container" class="absolute inset-0 w-full h-full z-0 bg-cover bg-center no-repeat" style="background-image: url('image/id1.jpg');"></div>
+    <section id="hero-section" class="relative w-full min-h-screen flex items-center overflow-hidden bg-gray-900">
+        <div id="slideshow-wrapper" class="absolute inset-0 z-0"></div>
         <div class="hero-overlay"></div>
 
         <div class="max-w-screen-2xl mx-auto px-8 pt-32 pb-20 w-full relative z-10">
@@ -108,25 +102,22 @@
                 <h1 id="hero-title" class="heading-font text-[2.5rem] md:text-[4rem] leading-[1.15] font-bold tracking-wide mb-6 text-white">
                     Crafting Spaces.<br><span class="text-brand-gradient">Refining Horizons.</span>
                 </h1>
-                                
+                                        
                 <p id="hero-subtitle" class="text-base md:text-lg text-white max-w-xl mb-10 font-medium leading-relaxed drop-shadow-md">
                     Masterful Plaster of Paris architectural ceilings, flawless structural wall screeding, and bespoke interior transformations designed for luxury lifestyles.
                 </p>
-                                
+                                        
                 <div class="flex items-center gap-x-4">
                     <button onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })"
                             class="px-8 py-4 bg-[#ff9100] text-white text-sm font-semibold tracking-wider uppercase hover:bg-blue-600 transition-all shadow-lg">
-                        Explore Our Services
+                        Our Services
                     </button>
-                    <a href="tel:08170900008" class="px-8 py-4 bg-transparent border border-white text-white hover:bg-white hover:text-gray-950 text-sm font-semibold tracking-wider uppercase transition-all">
-                        Call Office
-                    </a>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES -->
     <section id="services" class="py-24 bg-white relative">
         <div class="max-w-screen-2xl mx-auto px-8">
             <div class="flex justify-between items-end mb-16 border-b border-gray-200 pb-6">
@@ -138,7 +129,6 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-                <!-- Service 1 -->
                 <div class="service-card bg-white group rounded-xl overflow-hidden flex flex-col justify-between shadow-sm">
                     <div>
                         <div class="h-60 bg-[url('image/pop.jpg')] bg-cover bg-center relative overflow-hidden">
@@ -149,15 +139,14 @@
                             <h3 class="heading-font text-xl mb-3 font-semibold text-gray-950 group-hover:text-[#ff9100] transition-colors">POP Ceilings</h3>
                             <p class="text-gray-950 text-xs font-normal leading-relaxed mb-4">Intricate structural molding, seamless finishes, and majestic architectural lines that elevate basic rooms into design statements.</p>
                             <ul class="space-y-1.5 text-[11px] text-gray-950 font-semibold">
-                                <li class="flex items-center gap-x-1.5">• Coved &amp; Tray Ceiling Layouts</li>
-                                <li class="flex items-center gap-x-1.5">• Handcrafted Medallions &amp; Cornices</li>
+                                <li class="flex items-center gap-x-1.5">• Coved & Tray Ceiling Layouts</li>
+                                <li class="flex items-center gap-x-1.5">• Handcrafted Medallions & Cornices</li>
                                 <li class="flex items-center gap-x-1.5">• Custom Integrated LED Channels</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Service 2 -->
                 <div class="service-card bg-white group rounded-xl overflow-hidden flex flex-col justify-between shadow-sm">
                     <div>
                         <div class="h-60 bg-[url('image/screeding.jpg')] bg-cover bg-center relative overflow-hidden">
@@ -168,15 +157,14 @@
                             <h3 class="heading-font text-xl mb-3 font-semibold text-gray-950 group-hover:text-[#ff9100] transition-colors">Wall Screeding</h3>
                             <p class="text-gray-950 text-xs font-normal leading-relaxed mb-4">Perfectly glass-level surfaces prepared with extreme compound precision. The mandatory foundation of an exquisite interior look.</p>
                             <ul class="space-y-1.5 text-[11px] text-gray-950 font-semibold">
-                                <li class="flex items-center gap-x-1.5">• Premium Gypsum &amp; Cement Screeding</li>
-                                <li class="flex items-center gap-x-1.5">• Structural Crack Correction &amp; Alignment</li>
+                                <li class="flex items-center gap-x-1.5">• Premium Gypsum & Cement Screeding</li>
+                                <li class="flex items-center gap-x-1.5">• Structural Crack Correction & Alignment</li>
                                 <li class="flex items-center gap-x-1.5">• Industrial Moisture Barrier Protection</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Service 3 -->
                 <div class="service-card bg-white group rounded-xl overflow-hidden flex flex-col justify-between shadow-sm">
                     <div>
                         <div class="h-60 bg-[url('image/painting.jpg')] bg-cover bg-center relative overflow-hidden">
@@ -195,7 +183,6 @@
                     </div>
                 </div>
 
-                <!-- Service 4 -->
                 <div class="service-card bg-white group rounded-xl overflow-hidden flex flex-col justify-between shadow-sm">
                     <div>
                         <div class="h-60 bg-[url('image/interiordesign.jpg')] bg-cover bg-center relative overflow-hidden">
@@ -217,7 +204,6 @@
         </div>
     </section>
 
-    <!-- CRAFTSMANSHIP / BEFORE AFTER -->
     <section id="craft" class="py-24 bg-gray-50">
         <div class="max-w-screen-2xl mx-auto px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -242,7 +228,6 @@
                     </div>
                 </div>
 
-                <!-- Slider Interface -->
                 <div class="relative">
                     <div id="before-after" class="relative h-[420px] rounded-xl overflow-hidden shadow-xl border border-gray-300 select-none cursor-ew-resize">
                         <img id="before-img" src="https://picsum.photos/id/870/800/600" class="absolute inset-0 w-full h-full object-cover" alt="Before Construction" draggable="false">
@@ -266,7 +251,6 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
     <section class="py-24 bg-white">
         <div class="max-w-screen-2xl mx-auto px-8">
             <div class="text-center mb-16">
@@ -302,7 +286,7 @@
                     <div class="mt-8 flex items-center gap-x-3">
                         <div class="w-9 h-9 bg-[#9933ff]/10 rounded-full border border-[#9933ff]/20 flex items-center justify-center text-[#9933ff] font-bold text-xs">MA</div>
                         <div>
-                            <div class="font-bold text-xs text-gray-950">Mr &amp; Mrs Adebayo</div>
+                            <div class="font-bold text-xs text-gray-950">Mr & Mrs Adebayo</div>
                             <div class="text-[10px] text-gray-950 tracking-wide font-medium">Gwarimpa, Abuja</div>
                         </div>
                     </div>
@@ -311,7 +295,6 @@
         </div>
     </section>
 
-    <!-- FINAL CTA -->
     <section id="contact" class="py-24 bg-gray-50 border-b border-gray-200">
         <div class="max-w-screen-2xl mx-auto px-8 text-center">
             <div class="max-w-2xl mx-auto">
@@ -333,7 +316,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="bg-brand-navy text-white py-16">
         <div class="max-w-screen-2xl mx-auto px-8">
             <div class="flex flex-col md:flex-row justify-between gap-12">
@@ -369,32 +351,61 @@
                             <li><a href="#contact" class="hover:text-[#ff9100] transition-colors">Contact</a></li>
                         </ul>
                     </div>
-                    <!-- NETWORKS SECTION -->
-<div>
-    <div class="uppercase text-[10px] mb-4 text-gray-400 font-semibold tracking-widest">Networks</div>
-    <div class="flex items-center gap-x-3">
-        <!-- Instagram Icon Card Link -->
-        <a href="https://www.instagram.com/aricluxdesign/" target="_blank" rel="noopener" 
-           class="w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded flex items-center justify-center text-lg transition-all" 
-           title="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-        <!-- Google Business Profile Card Link (Updated with recognizable "G" icon) -->
-        <a href="https://www.google.com/maps/place/Ariclux+Design+Abuja/@9.0750625,7.3999876,649m/data=!3m2!1e3!4b1!4m6!3m5!1s0x104e75f6dbeaa513:0x45b08d5628cc87db!8m2!3d9.0750625!4d7.4025625!16s%2Fg%2F11zjvslcgk?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D" 
-           target="_blank" rel="noopener" 
-           class="w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded flex items-center justify-center text-lg transition-all" 
-           title="Google Business Profile">
-            <i class="fa-brands fa-google"></i>
-        </a>
-    </div>
-</div>
+                    <div>
+                        <div class="uppercase text-[10px] mb-4 text-gray-400 font-semibold tracking-widest">Networks</div>
+                        <div class="flex items-center gap-x-3">
+                            <a href="https://www.instagram.com/aricluxdesign/" target="_blank" rel="noopener" 
+                               class="w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded flex items-center justify-center text-lg transition-all" 
+                               title="Instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="https://www.google.com/maps/place/Ariclux+Design+Abuja/@9.0750625,7.3999876,649m/data=!3m2!1e3!4b1!4m6!3m5!1s0x104e75f6dbeaa513:0x45b08d5628cc87db!8m2!3d9.0750625!4d7.4025625!16s%2Fg%2F11zjvslcgk?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D" 
+                               target="_blank" rel="noopener" 
+                               class="w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded flex items-center justify-center text-lg transition-all" 
+                               title="Google Business Profile">
+                                <i class="fa-brands fa-google"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- BEFORE AFTER IMAGE SLIDER SCRIPT -->
     <script>
+        // --- 1. HERO BACKGROUND SLIDESHOW ENGINE ---
+        const slideshowImages = [
+            'image/id2.jpg',
+            'image/id3.jpg',
+            'image/id3.jpg',
+        ];
+        
+        const wrapper = document.getElementById('slideshow-wrapper');
+        
+        if (wrapper && slideshowImages.length > 0) {
+            // Populate image layers
+            slideshowImages.forEach((src, idx) => {
+                const layer = document.createElement('div');
+                layer.className = `slideshow-layer${idx === 0 ? ' active' : ''}`;
+                layer.style.backgroundImage = `url('${src}')`;
+                wrapper.appendChild(layer);
+            });
+            
+            let currentSlideIndex = 0;
+            const layers = wrapper.getElementsByClassName('slideshow-layer');
+            
+            setInterval(() => {
+                if(layers.length === 0) return;
+                // Remove active status from old layer
+                layers[currentSlideIndex].classList.remove('active');
+                // Calculate next target item
+                currentSlideIndex = (currentSlideIndex + 1) % layers.length;
+                // Transition opacity on to the new layer
+                layers[currentSlideIndex].classList.add('active');
+            }, 5000); // Transitions gracefully every 5 seconds
+        }
+
+        // --- 2. BEFORE AFTER IMAGE SLIDER SCRIPT ---
         const container = document.getElementById('before-after');
         const afterContainer = document.getElementById('after-container');
         const divider = document.getElementById('slider-divider');
