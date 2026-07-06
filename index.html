@@ -74,9 +74,18 @@
             border-color: rgba(0, 82, 204, 0.4);
             transform: translateY(-4px);
         }
+
+        /* Mobile Drawer Utilities */
+        .mobile-menu-open {
+            overflow: hidden;
+        }
+        #mobile-drawer {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
     </style>
 </head>
 <body class="text-[#111827] overflow-x-hidden">
+    <!-- NAVIGATION -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200">
         <div class="max-w-screen-2xl mx-auto flex items-center justify-between px-8 py-2">
             <div class="flex items-center justify-center max-h-16 overflow-hidden">
@@ -85,17 +94,44 @@
                      class="h-16 w-auto object-scale-down [image-rendering:_-webkit-optimize-contrast] [image-rendering:_crisp-edges] [image-rendering:_pixelated]">
             </div>
                                 
+            <!-- Desktop Menu Links -->
             <div class="hidden md:flex items-center gap-x-8 text-xs uppercase tracking-widest font-bold text-gray-950">
+                <a href="#about" class="hover:text-[#ff9100] transition-colors">About Us</a>
                 <a href="#services" class="hover:text-[#ff9100] transition-colors">Services</a>
                 <a href="#craft" class="hover:text-[#ff9100] transition-colors">Craftsmanship</a>
-                <a href="#contact" class="hover:text-[#ff9100] transition-colors">Contact</a>
+               
             </div>
                                 
-            <a href="tel:07067445945" class="px-6 py-2.5 bg-transparent border border-[#ff9100] text-[#ff9100] hover:bg-[#ff9100] hover:text-white transition-all text-xs tracking-widest uppercase font-semibold">
+            <!-- Desktop Action Button -->
+            <a href="tel:07067445945" class="hidden md:inline-block px-6 py-2.5 bg-transparent border border-[#ff9100] text-[#ff9100] hover:bg-[#ff9100] hover:text-white transition-all text-xs tracking-widest uppercase font-semibold">
                 07067445945
             </a>
+
+            <!-- Mobile Hamburger Menu Button -->
+            <button id="menu-toggle" class="block md:hidden text-gray-950 hover:text-[#ff9100] focus:outline-none p-2 z-50" aria-label="Toggle Navigation Menu">
+                <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+            </button>
         </div>
     </nav>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div id="mobile-drawer" class="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl z-40 transform translate-x-full md:hidden flex flex-col justify-between p-8 pt-24 border-l border-gray-100">
+        <div class="flex flex-col gap-y-6 text-sm uppercase tracking-widest font-bold text-gray-950">
+            <a href="#about" class="mobile-link hover:text-[#ff9100] transition-colors flex items-center gap-x-3"><i class="fa-solid fa-building text-xs text-gray-400"></i> About Us</a>
+            <a href="#services" class="mobile-link hover:text-[#ff9100] transition-colors flex items-center gap-x-3"><i class="fa-solid fa-layer-group text-xs text-gray-400"></i> Services</a>
+            <a href="#craft" class="mobile-link hover:text-[#ff9100] transition-colors flex items-center gap-x-3"><i class="fa-solid fa-compass-drafting text-xs text-gray-400"></i> Craftsmanship</a>
+            
+            <a href="tel:07067445945" class="mobile-link inline-block text-center px-6 py-3 bg-[#ff9100] text-white transition-all text-xs tracking-widest uppercase font-semibold mt-4 rounded-lg">
+                <i class="fa-solid fa-phone mr-2"></i> Call: 07067445945
+            </a>
+        </div>
+        <div class="border-t border-gray-100 pt-6">
+            <div class="text-[10px] uppercase font-bold tracking-wider text-gray-400 mb-2">Abuja Corporate HQ</div>
+            <p class="text-xs text-gray-600 font-medium leading-relaxed">Jabi, Abuja, Federal Capital Territory, Nigeria</p>
+        </div>
+    </div>
+    <!-- Mobile Drawer Overlay backdrop -->
+    <div id="drawer-overlay" class="fixed inset-0 bg-black/40 z-30 hidden md:hidden opacity-0 transition-opacity duration-300"></div>
 
     <section id="hero-section" class="relative w-full min-h-screen flex items-center overflow-hidden bg-gray-900">
         <div id="slideshow-wrapper" class="absolute inset-0 z-0"></div>
@@ -122,6 +158,102 @@
 
         <!-- Interactive Slideshow Indicators -->
         <div id="slideshow-dots" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-x-3 bg-black/20 backdrop-blur-sm px-4 py-2.5 rounded-full border border-white/10"></div>
+    </section>
+
+ 
+ <!-- ABOUT, MISSION, VISION SECTION (PREMIUM EDITORIAL REDESIGN) -->
+<section id="about" class="py-24 bg-white relative border-b border-gray-100">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                
+                <!-- Left Content: Profile Header and Narrative -->
+                <div class="lg:col-span-7">
+                    <span class="uppercase text-[#ff9100] tracking-[4px] text-xs font-semibold block mb-2">Corporate Profile</span>
+                    <h2 class="heading-font text-3xl md:text-4xl tracking-wider font-medium text-gray-950 mb-6">
+                        About Us
+                    </h2>
+                    <div class="space-y-4 text-sm text-gray-700 leading-relaxed font-medium">
+                        <p>
+                            <strong class="text-gray-950 font-bold">Ariclux Services Limited</strong> is a registered Nigerian company specializing in interior finishing and building improvement solutions. 
+                        </p>
+                        <p>
+                            Our company provides comprehensive services that enhance the beauty, functionality, and long-term value of residential, commercial, institutional, and industrial buildings.
+                        </p>
+                        <p>
+                            Operating from Abuja, we serve clients across the Federal Capital Territory and throughout Nigeria.
+                        </p>
+                        <p>
+                            We employ modern construction techniques, quality materials, and experienced artisans to ensure every project meets the highest industry standards.
+                        </p>
+                        <p>
+                            Whether engaged for a single room renovation or a large commercial development, we approach every assignment with the same commitment to excellence.
+                        </p>
+                    </div>
+
+                    <!-- Vision & Mission Inner Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 pt-8 border-t border-gray-100">
+                        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200/60">
+                            <div class="flex items-center gap-x-3 mb-3">
+                                <span class="w-7 h-7 bg-[#ff9100]/10 text-[#ff9100] rounded-lg flex items-center justify-center text-xs"><i class="fa-solid fa-eye"></i></span>
+                                <h4 class="text-xs uppercase tracking-wider font-bold text-gray-950">Our Vision</h4>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed font-semibold">
+                                To become Africa's leading interior finishing and real estate solutions company recognized for transforming spaces through quality craftsmanship, innovative design, and trusted service delivery.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200/60">
+                            <div class="flex items-center gap-x-3 mb-3">
+                                <span class="w-7 h-7 bg-[#0052cc]/10 text-[#0052cc] rounded-lg flex items-center justify-center text-xs"><i class="fa-solid fa-bullseye"></i></span>
+                                <h4 class="text-xs uppercase tracking-wider font-bold text-gray-950">Our Mission</h4>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed font-semibold">
+                                To create lasting environments through expert POP and Gypsum Board installation, wall screeding, painting, 3D interior design, furniture solutions, and comprehensive renovation services while maintaining the highest standards of professionalism, innovation, integrity, and customer satisfaction.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content: The Three Core Value Pillars -->
+                <div class="lg:col-span-5 bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-200 relative lg:sticky lg:top-24 shadow-sm">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#ff9100]/5 to-transparent rounded-tr-2xl pointer-events-none"></div>
+                    <h3 class="heading-font text-lg font-bold text-gray-950 mb-1">Our Pillars</h3>
+                    <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-6">Our success is built on three pillars</p>
+                    
+                    <div class="space-y-6">
+                        <!-- Pillar 1 -->
+                        <div class="flex gap-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-[#ff9100] flex-shrink-0 flex items-center justify-center text-white shadow-md shadow-[#ff9100]/20">
+                                <i class="fa-solid fa-award text-sm"></i>
+                            </div>
+                            <div class="flex items-center">
+                                <h4 class="text-xs uppercase tracking-widest font-bold text-gray-950">Exceptional Craftsmanship</h4>
+                            </div>
+                        </div>
+
+                        <!-- Pillar 2 -->
+                        <div class="flex gap-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-[#0052cc] flex-shrink-0 flex items-center justify-center text-white shadow-md shadow-[#0052cc]/20">
+                                <i class="fa-solid fa-user-check text-sm"></i>
+                            </div>
+                            <div class="flex items-center">
+                                <h4 class="text-xs uppercase tracking-widest font-bold text-gray-950">Professional Service Delivery</h4>
+                            </div>
+                        </div>
+
+                        <!-- Pillar 3 -->
+                        <div class="flex gap-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-purple-600 flex-shrink-0 flex items-center justify-center text-white shadow-md shadow-purple-600/20">
+                                <i class="fa-solid fa-heart text-sm"></i>
+                            </div>
+                            <div class="flex items-center">
+                                <h4 class="text-xs uppercase tracking-widest font-bold text-gray-950">Customer Satisfaction</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
 
     <section id="services" class="py-24 bg-white relative">
@@ -236,11 +368,11 @@
                 <div class="relative">
                     <div id="before-after" class="relative h-[420px] rounded-xl overflow-hidden shadow-xl border border-gray-300 select-none cursor-ew-resize">
                         <img id="before-img" src="image/after.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Before Construction" draggable="false">
-                                                                
+                                                                                
                         <div id="after-container" class="absolute inset-0 overflow-hidden" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
                             <img id="after-img" src="image/before.jpg" class="absolute inset-0 w-full h-full object-cover" alt="After Treatment" draggable="false">
                         </div>
-                                                                
+                                                                                
                         <div id="slider-divider" class="absolute top-0 bottom-0 w-0.5 bg-[#ff9100] shadow-xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
                             <div class="w-8 h-8 rounded-full border border-[#ff9100] bg-white flex items-center justify-center text-[#ff9100] text-xs shadow-2xl font-bold">
                                 ↔
@@ -311,7 +443,7 @@
                     From early architectural schematics to final structural review breakouts, translate your layout vision with Ariclux Services Limited.
                 </p>
                                 
-                <div class="inline-block border border-gray-200 bg-white rounded-xl px-12 py-6 shadow-sm">
+                <div id="footer-phone-anchor" class="inline-block border border-gray-200 bg-white rounded-xl px-12 py-6 shadow-sm transition-all duration-300">
                     <div class="text-[11px] text-gray-950 uppercase tracking-[3px] mb-2 font-bold">Direct Project Pipeline</div>
                     <a href="tel:07067445945" class="heading-font text-2xl md:text-3xl font-bold text-[#ff9100] hover:text-blue-600 transition-colors block tracking-widest">
                         07067445945
@@ -350,7 +482,7 @@
                     <div>
                         <div class="uppercase text-[10px] mb-4 text-brand-navy-light/70 font-semibold tracking-widest">Enterprise</div>
                         <ul class="space-y-2 text-xs text-brand-navy-light font-medium">
-                            <li><a href="#" class="hover:text-[#ff9100] transition-colors">Our Story</a></li>
+                            <li><a href="#about" class="hover:text-[#ff9100] transition-colors">Our Story</a></li>
                             <li><a href="#" class="hover:text-[#ff9100] transition-colors">Portfolio</a></li>
                             <li><a href="#" class="hover:text-[#ff9100] transition-colors">Careers</a></li>
                             <li><a href="#contact" class="hover:text-[#ff9100] transition-colors">Contact</a></li>
@@ -378,12 +510,56 @@
     </footer>
 
     <script>
-        // --- 1. HERO BACKGROUND SLIDESHOW ENGINE ---
+        // --- 1. MOBILE DRAWER NAVIGATION ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        const drawerOverlay = document.getElementById('drawer-overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isOpen = mobileDrawer.classList.contains('translate-x-0');
+            if (isOpen) {
+                mobileDrawer.classList.remove('translate-x-0');
+                mobileDrawer.classList.add('translate-x-full');
+                drawerOverlay.classList.add('hidden');
+                drawerOverlay.classList.remove('opacity-100');
+                document.body.classList.remove('mobile-menu-open');
+                menuIcon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                mobileDrawer.classList.remove('translate-x-full');
+                mobileDrawer.classList.add('translate-x-0');
+                drawerOverlay.classList.remove('hidden');
+                setTimeout(() => drawerOverlay.classList.add('opacity-100'), 10);
+                document.body.classList.add('mobile-menu-open');
+                menuIcon.className = 'fa-solid fa-xmark text-xl';
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        drawerOverlay.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // MOBILE CONTACT REDIRECT focus helper
+        document.getElementById('mobile-contact-trigger')?.addEventListener('click', (e) => {
+            setTimeout(() => {
+                const targetBox = document.getElementById('footer-phone-anchor');
+                if(targetBox) {
+                    targetBox.style.borderColor = '#ff9100';
+                    targetBox.style.transform = 'scale(1.03)';
+                    setTimeout(() => {
+                        targetBox.style.borderColor = '';
+                        targetBox.style.transform = '';
+                    }, 1500);
+                }
+            }, 500);
+        });
+
+        // --- 2. HERO BACKGROUND SLIDESHOW ENGINE ---
         const slideshowImages = [
             'image/id2.jpg',
             'image/id3.jpg',
             'image/id1.jpg'
-          
         ];
         
         const wrapper = document.getElementById('slideshow-wrapper');
@@ -448,7 +624,7 @@
             startInterval();
         }
 
-        // --- 2. BEFORE AFTER IMAGE SLIDER SCRIPT ---
+        // --- 3. BEFORE AFTER IMAGE SLIDER SCRIPT ---
         const container = document.getElementById('before-after');
         const afterContainer = document.getElementById('after-container');
         const divider = document.getElementById('slider-divider');
